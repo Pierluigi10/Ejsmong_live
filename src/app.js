@@ -19,6 +19,18 @@ app.get("/", (req, res) => {
   });
 });
 
+app.get('/speakers', (req, res) => {
+  res.render('speakers', {
+      pageTitle: "Speakers"
+  });
+});
+
+app.get('/presentations', (req, res) => {
+  res.render('presentations', {
+      pageTitle: "Presentations"
+  });
+});
+
 app.listen(port, () => {
   console.log(`Now listening on port http://localhost:${port}`);
 });
