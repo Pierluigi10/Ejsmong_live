@@ -27,9 +27,13 @@ app.get("/", (req, res) => {
 });
 
 app.get("/speakers", (req, res) => {
-  res.render("speakers", {
-    pageTitle: "Speakers",
-  });
+  (async () => {
+    const speakers = await SpeakerModel.find({});
+    res.render("speakers", {
+      pageTitle: "Speakers",
+      speakers, // in alternativespeakers: speakers,
+    });
+  })();
 });
 
 app.get("/presentations", (req, res) => {
