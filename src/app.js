@@ -18,9 +18,11 @@ app.use(express.static(staticDirectory));
 
 app.set("views", path.join(__dirname, "./src/views"));
 
-app.get("/", (req, res) => {
+app.get("/", async (req, res) => {
   res.render("index", {
     pageTitle: "Welcome",
+    speakers: await SpeakersController.getAllSpeakers(),
+    presentations: await PresentationsController.getAllPresentations()
   });
 });
 
