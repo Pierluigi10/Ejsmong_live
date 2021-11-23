@@ -25,6 +25,7 @@ app.get("/", async (req, res) => {
     presentations: await PresentationsController.getAllPresentations(),
     countries: await SpeakersController.getAllCountries(),
     sponsors: await SponsorsController.getAllSponsors(),
+    rooms: await PresentationsController.getAllRooms(),
   });
 });
 

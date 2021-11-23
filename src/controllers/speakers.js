@@ -8,8 +8,8 @@ export const getAllSpeakers = async () => {
 export const getAllCountries = async () => {
   const speakers = await SpeakerModel.find({});
   const countries = speakers.map((speaker) => speaker.country);
-  const uniqCountries = [...new Set(countries)]
+  const uniqueCountries = [...new Set(countries)]
     .join(", ")
     .replace(/,(?=[^,]*$)/, " and ");
-  return uniqCountries;
+  return uniqueCountries;
 };
