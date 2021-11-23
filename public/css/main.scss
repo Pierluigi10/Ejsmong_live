@@ -7,4 +7,21 @@ body {
     h2{
         color:red;
     }
+    nav {
+        background-color: #444;
+        padding: 10px;
+        font-size: 1.3rem;
+        a {
+            color: #bbb;
+            text-decoration: none;
+            &.active {
+                color: #ddd;
+                font-weight: bold;
+                text-shadow: 2px 2px 2px #444;
+            }
+        }
+        color: #666;
+        display: flex;
+        justify-content: space-between;
+    }
 }
