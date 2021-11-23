@@ -1,19 +1,11 @@
 import express from "express";
 import path from "path";
+import * as SpeakersController from './controllers/speakers.js';
+import * as PresentationsController from './controllers/presentations.js';
 import mongoose from "mongoose";
 
 mongoose.connect("mongodb://localhost:27017/mongoConference");
-const speakerSchema = mongoose.Schema({
-  name: String,
-  country: String,
-});
-const SpeakerModel = mongoose.model("Speaker", speakerSchema);
 
-const presentationSchema = mongoose.Schema({
-  title: String,
-  room: String,
-});
-const PresentationModel = mongoose.model("Presentation", presentationSchema);
 
 const app = express();
 const __dirname = path.resolve(path.dirname(""));
@@ -32,24 +24,38 @@ app.get("/", (req, res) => {
   });
 });
 
-app.get("/speakers", (req, res) => {
-  (async () => {
-    const speakers = await SpeakerModel.find({});
-    res.render("speakers", {
-      pageTitle: "Speakers",
-      speakers, // in alternative speakers: speakers,
-    });
-  })();
+// app.get("/speakers", (req, res) => {
+//   (async () => {
+//     const speakers = await SpeakerModel.find({});
+//     res.render("speakers", {
+//       pageTitle: "Speakers",
+//       speakers, // in alternative speakers: speakers,
+//     });
+//   })();
+// });
+app.get('/speakers', async (req, res) => {
+	res.render('speakers', {
+		pageTitle: "Speakers",
+		speakers: await SpeakersController.getAllSpeakers()
+	});
 });
 
-app.get("/presentations", (req, res) => {
-  (async () => {
-    const presentations = await PresentationModel.find({});
-    res.render("presentations", {
-      pageTitle: "Presentations",
-      presentations, // in alternative presentations: presentations,
-    });
-  })();
+// app.get("/presentations", (req, res) => {
+//   (async () => {
+//     const presentations = await PresentationModel.find({});
+//     res.render("presentations", {
+//       pageTitle: "Presentations",
+//       presentations, // in alternative presentations: presentations,
+//     });
+//   })();
+// });
+
+
+app.get('/presentations', async (req, res) => {
+	res.render('presentations', {
+		pageTitle: await PresentationsController.getPageTitle(),
+		presentations: await PresentationsController.getAllPresentations()
+	});
 });
 
 app.listen(port, () => {
