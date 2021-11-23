@@ -9,6 +9,12 @@ const speakerSchema = mongoose.Schema({
 });
 const SpeakerModel = mongoose.model("Speaker", speakerSchema);
 
+const presentationSchema = mongoose.Schema({
+  title: String,
+  room: String,
+});
+const PresentationModel = mongoose.model("Presentation", presentationSchema);
+
 const app = express();
 const __dirname = path.resolve(path.dirname(""));
 const port = 3044;
@@ -31,15 +37,19 @@ app.get("/speakers", (req, res) => {
     const speakers = await SpeakerModel.find({});
     res.render("speakers", {
       pageTitle: "Speakers",
-      speakers, // in alternativespeakers: speakers,
+      speakers, // in alternative speakers: speakers,
     });
   })();
 });
 
 app.get("/presentations", (req, res) => {
-  res.render("presentations", {
-    pageTitle: "Presentations",
-  });
+  (async () => {
+    const presentations = await PresentationModel.find({});
+    res.render("presentations", {
+      pageTitle: "Presentations",
+      presentations, // in alternative presentations: presentations,
+    });
+  })();
 });
 
 app.listen(port, () => {
