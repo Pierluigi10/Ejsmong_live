@@ -3,7 +3,7 @@
 <p>This page displays all the speakers at the conference.</p>
 <ul>
   <% speakers.forEach(speaker => { %>
-  <li><%=speaker.name%></li>
+  <li><%=speaker.name%>, <%=speaker.country%></li>
   <% }); %>
 </ul>
 <%- include('_footer.ejs')%>
