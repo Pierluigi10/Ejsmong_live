@@ -1,9 +1,8 @@
-
-  
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 
 const speakerSchema = mongoose.Schema({
-	name: String
+  name: String,
+  country: String,
 });
 const SpeakerModel = mongoose.model("Speaker", speakerSchema);
 

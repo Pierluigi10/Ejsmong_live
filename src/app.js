@@ -23,6 +23,7 @@ app.get("/", async (req, res) => {
     pageTitle: "Welcome",
     speakers: await SpeakersController.getAllSpeakers(),
     presentations: await PresentationsController.getAllPresentations(),
+    countries: await SpeakersController.getAllCountries(),
   });
 });
 
